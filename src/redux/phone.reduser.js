@@ -6,7 +6,8 @@ const phoneBookContacts = [
 ];
 
 const initialState = {
-    contacts:  JSON.parse(window.localStorage.getItem('contacts')) ?? phoneBookContacts
+    contacts: JSON.parse(window.localStorage.getItem('contacts')) ?? phoneBookContacts,
+    
 };
 
 export const phoneReducer = (state = initialState, action) => {
@@ -22,7 +23,13 @@ export const phoneReducer = (state = initialState, action) => {
                 ...state,
                 contacts: state.contacts.filter(user => user.id !== action.payload)
             }
-            }
+        }
+        // case 'contacts/searchUser': {
+        //     return {
+        //         ...state,
+        //         filter: action.payload
+        //     };
+        //     }
             
           
         default:

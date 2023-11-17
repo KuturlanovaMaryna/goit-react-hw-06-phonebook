@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const App = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.phoneStore.contacts);
+
   const [filter, setFilter] = useState('');
 
   const handleDeleteUser = id => {
