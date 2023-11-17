@@ -37,3 +37,18 @@ export const phoneReducer = (state = initialState, action) => {
     }
     return state;
 }
+
+export const createNewUser = (payload) => {
+     return {
+        type: 'contacts/createUser',
+        payload,
+            }
+}
+
+export const deleteUser = (payload) => {
+    return {
+        type: 'contacts/deleteUser',
+        payload,
+      };
+    
+}

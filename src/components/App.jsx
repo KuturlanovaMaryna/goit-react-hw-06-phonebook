@@ -6,6 +6,7 @@ import ContactList from './ContactList/ContactList';
 import css from './App.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser, createNewUser } from 'redux/phone.reduser';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -15,11 +16,11 @@ const App = () => {
 
   const handleDeleteUser = id => {
     if (window.confirm('Are you sure?')) {
-      const deleteContactAction = {
-        type: 'contacts/deleteUser',
-        payload: id,
-      };
-      dispatch(deleteContactAction);
+      // const deleteContactAction = {
+      //   type: 'contacts/deleteUser',
+      //   payload: id,
+      // };
+      dispatch(deleteUser(id));
     }
   };
 
@@ -37,11 +38,11 @@ const App = () => {
       id: nanoid(),
     };
 
-    const addProductAction = {
-      type: 'contacts/createUser',
-      payload: newContact,
-    };
-    dispatch(addProductAction);
+    // const addProductAction = {
+    //   type: 'contacts/createUser',
+    //   payload: newContact,
+    // };
+    dispatch(createNewUser(newContact));
   };
 
   const handlerSearch = e => {
