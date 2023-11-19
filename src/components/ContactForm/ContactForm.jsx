@@ -1,49 +1,47 @@
 import React, { useState } from 'react';
 import css from './ContactForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { createNewUser } from 'redux/phone.reduser';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { nanoid } from 'nanoid';
 
-const ContactForm = ({ onSubmit }) => {
-  // state = {
-  //   name: '',
-  //   number: '',
-  // };
+const ContactForm = () => {
   const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.phoneStore.contacts);
 
   const handleNameChange = e => {
     setName(e.target.value);
   };
 
-  const [number, setNumber] = useState('');
-
   const handleNumberChange = e => {
     setNumber(e.target.value);
   };
-  // handleChange = name => event => {
-  //   const { target } = event;
-
-  //   this.setState(() => ({
-  //     [name]: target.value,
-  //   }));
-  // };
 
   const handleSubmit = event => {
     event.preventDefault();
-    // console.log('submited')
-    onSubmit({ name, number });
+    const contact = {
+      name,
+      number,
+    };
+
+    if (
+      contacts.some(
+        item => item.name.toLowerCase() === contact.name.toLowerCase()
+      )
+    ) {
+      Notify.warning(`${contact.name} is alredy in your contacts`);
+      return;
+    }
+    const newContact = {
+      ...contact,
+      id: nanoid(),
+    };
+    dispatch(createNewUser(newContact));
     setName('');
     setNumber('');
-    // if (
-    //   this.props.contacts.some(
-    //     contact => contact.name.toLowerCase() === this.state.name.toLowerCase()
-    //   )
-    // ) {
-    //   Notify.warning(`${this.state.name} is alredy in your contacts`);
-    //   return;
-    // }
-
-    // if (this.state.number && this.state.name) {
-    //   this.props.createUser(this.state);
-    //   this.setState({ number: '', name: '' });
-    // }
   };
 
   return (

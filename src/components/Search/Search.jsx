@@ -1,19 +1,16 @@
-import PropTypes from 'prop-types';
 import css from './Search.module.css';
+import { filterContact } from 'redux/filter.reducer';
+import { useDispatch } from 'react-redux';
 
-const Search = ({ onChange, value }) => {
+const Search = () => {
+  const dispatch = useDispatch();
+
   return (
     <input
       className={css.searcher}
-      value={value}
-      onChange={e => onChange(e.target.value)}
+      onChange={e => dispatch(filterContact(e.target.value))}
     />
   );
 };
 
 export default Search;
-
-Search.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-};
