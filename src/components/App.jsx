@@ -45,8 +45,8 @@ const App = () => {
     dispatch(createNewUser(newContact));
   };
 
-  const handlerSearch = e => {
-    const filtered = e.currentTarget.value;
+  const handlerSearch = value => {
+    const filtered = value;
     dispatch(filterContact(filtered));
     // setFilter(e.currentTarget.value);
   };
